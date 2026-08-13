@@ -437,12 +437,12 @@ def load_models():
             # Coba membaca beberapa byte pertama
             with open(path, "rb") as f:
                 first_bytes = f.read(100)
-
-            print("=" * 80)
-            print(f"MODEL      : {name}")
-            print(f"PATH       : {path}")
-            print(f"FILE SIZE  : {file_size} bytes")
-            print(f"FIRST BYTE : {first_bytes}")
+            st.write(f"DEBUG {name}")
+            st.write(f"Path: {path}")
+            st.write(f"Ukuran file: {os.path.getsize(path)} bytes")
+            st.write(f"Byte pertama: {first_bytes[:32]}")
+                
+            model = joblib.load(path)
 
             # Load model
             model = joblib.load(path)
