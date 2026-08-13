@@ -706,24 +706,23 @@ def page_klasifikasi(models, load_errors):
     st.markdown('<div class="main-header">🧮 Klasifikasi Risiko Burnout</div>', unsafe_allow_html=True)
     st.markdown('<div class="sub-header">Isi seluruh variabel di bawah untuk mendapatkan hasil klasifikasi.</div>',
                 unsafe_allow_html=True)
-
+    
     if load_errors:
-    for name, error in load_errors.items():
-
-        st.error(
-            f"**{name}: Gagal memuat model**"
-        )
-
-        st.code(
-            f"Jenis Error : {error['type']}\n"
-            f"Pesan       : {error['message']}\n\n"
-            f"Traceback:\n{error['traceback']}",
-            language="text"
-        )
-
-    if not models:
-        st.stop()
-
+        for name, error in load_errors.items():
+            st.error(
+                f"**{name}: Gagal memuat model**"
+            )
+            
+            st.code(
+                f"Jenis Error : {error['type']}\n"
+                f"Pesan       : {error['message']}\n\n"
+                f"Traceback:\n{error['traceback']}",
+                language="text"
+            )
+            
+        if not models:
+            st.stop()
+            
     st.markdown('<div class="step-header">Langkah 1 — Input Semua Variabel</div>', unsafe_allow_html=True)
 
     values = {}
