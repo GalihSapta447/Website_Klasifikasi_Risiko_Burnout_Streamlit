@@ -437,16 +437,10 @@ def load_models():
             # Coba membaca beberapa byte pertama
             with open(path, "rb") as f:
                 first_bytes = f.read(100)
-            st.write(f"DEBUG {name}")
-            st.write(f"Path: {path}")
-            st.write(f"Ukuran file: {os.path.getsize(path)} bytes")
-            st.write(f"Byte pertama: {first_bytes[:32]}")
-                
-            model = joblib.load(path)
+
 
             # Load model
             model = joblib.load(path)
-
             models[name] = model
 
             print(f"STATUS     : BERHASIL LOAD {name}")
