@@ -675,7 +675,7 @@ def page_klasifikasi(models, load_errors):
         if not models:
             st.stop()
 
-    st.markdown('<div class="step-header">Input Semua Variabel</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Langkah 1 — Input Semua Variabel</div>', unsafe_allow_html=True)
 
     values = {}
     tabs = st.tabs([f"👤 {k}" if k == "Demografi" else
@@ -711,14 +711,14 @@ def page_klasifikasi(models, load_errors):
                         mapped_value = dict(field["options"])[choice]
                         values[field["name"]] = mapped_value
 
-    st.markdown('<div class="step-header">Pilih Model</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Langkah 2 — Pilih Model</div>', unsafe_allow_html=True)
     available_models = list(models.keys())
     if not available_models:
         st.warning("Belum ada model yang berhasil dimuat.")
         return
     model_choice = st.radio("Model klasifikasi:", available_models, horizontal=True)
 
-    st.markdown('<div class="step-header">Jalankan Klasifikasi</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Langkah 3 — Jalankan Klasifikasi</div>', unsafe_allow_html=True)
     run = st.button("🚀 Jalankan Klasifikasi", type="primary", use_container_width=True)
 
     if run:
