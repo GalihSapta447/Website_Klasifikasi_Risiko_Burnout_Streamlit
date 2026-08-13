@@ -871,7 +871,7 @@ def page_riwayat():
         st.markdown('<div class="step-header">Hapus Salah Satu Riwayat</div>', unsafe_allow_html=True)
         options = {f"{r['waktu']} — {r['model']} — {r['hasil_id']}": r["id"] for r in riwayat}
         selected = st.selectbox("Pilih entri riwayat:", list(options.keys()), key="del_one_select")
-        if st.button("🗑️ Hapus Entri Ini", use_container_width=True):
+        if st.button("🗑️ Hapus Riwayat Ini", use_container_width=True):
             target_id = options[selected]
             st.session_state.riwayat = [r for r in st.session_state.riwayat if r["id"] != target_id]
             save_history(st.session_state.riwayat)
