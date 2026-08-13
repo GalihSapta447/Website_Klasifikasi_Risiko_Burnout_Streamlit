@@ -422,19 +422,57 @@ st.markdown("""
 def load_models():
     models = {}
     errors = {}
+
     for name, path in MODEL_PATHS.items():
         try:
             if not os.path.exists(path):
-                errors[name] = f"File tidak ditemukan di `{path}`."
+                errors[name] = (
+                    f"File tidak ditemukan: {path}"
+                )
                 continue
-            models[name] = joblib.load(path)
-        except ModuleNotFoundError as e:
-            errors[name] = (
-                f"Gagal memuat model modul Python belum terpasang: `{e.name}`. "
-                f"Jalankan `pip install -r requirements.txt` lalu restart aplikasi."
-            )
-        except Exception as e:  # noqa: BLE001
-            errors[name] = f"Gagal memuat model: {e}"
+
+            # Informasi file
+            file_size = os.path.getsize(path)
+
+            # Coba membaca beberapa byte pertama
+            with open(path, "rb") as f:
+                first_bytes = f.read(100)
+
+            print("=" * 80)
+            print(f"MODEL      : {name}")
+            print(f"PATH       : {path}")
+            print(f"FILE SIZE  : {file_size} bytes")
+            print(f"FIRST BYTE : {first_bytes}")
+
+            # Load model
+            model = joblib.load(path)
+
+            models[name] = model
+
+            print(f"STATUS     : BERHASIL LOAD {name}")
+            print("=" * 80)
+
+        except Exception as e:
+            import traceback
+
+            error_type = type(e).__name__
+            error_message = str(e)
+            traceback_text = traceback.format_exc()
+
+            print("=" * 80)
+            print(f"MODEL ERROR: {name}")
+            print(f"TYPE       : {error_type}")
+            print(f"MESSAGE    : {error_message}")
+            print("TRACEBACK:")
+            print(traceback_text)
+            print("=" * 80)
+
+            errors[name] = {
+                "type": error_type,
+                "message": error_message,
+                "traceback": traceback_text,
+            }
+
     return models, errors
 
 
@@ -670,10 +708,21 @@ def page_klasifikasi(models, load_errors):
                 unsafe_allow_html=True)
 
     if load_errors:
-        for name, msg in load_errors.items():
-            st.error(f"**{name}**: {msg}")
-        if not models:
-            st.stop()
+    for name, error in load_errors.items():
+
+        st.error(
+            f"**{name}: Gagal memuat model**"
+        )
+
+        st.code(
+            f"Jenis Error : {error['type']}\n"
+            f"Pesan       : {error['message']}\n\n"
+            f"Traceback:\n{error['traceback']}",
+            language="text"
+        )
+
+    if not models:
+        st.stop()
 
     st.markdown('<div class="step-header">Langkah 1 — Input Semua Variabel</div>', unsafe_allow_html=True)
 
