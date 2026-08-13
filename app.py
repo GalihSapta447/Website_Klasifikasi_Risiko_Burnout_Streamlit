@@ -897,8 +897,8 @@ def main():
     init_session_state()
 
     with st.sidebar:
-        st.markdown("## 🔥 Klasifikasi Risiko Burnout")
-        st.caption("Navigasi Aplikasi")
+        st.markdown("## 🔥 Tech Risk Burnout")
+        st.caption("Menu Aplikasi")
         page = st.radio(
             "Menu",
             ["🏠 Beranda", "🧮 Klasifikasi Risiko", "📚 Informasi Kelompok Variabel", "🕘 Riwayat Prediksi"],
