@@ -2,18 +2,16 @@ import json
 import os
 import warnings
 from datetime import datetime
-
 import joblib
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
-
 warnings.filterwarnings("ignore")
 
 
 # KONFIGURASI DASAR
 st.set_page_config(
-    page_title="Klasifikasi Risiko Burnout",
+    page_title="Klasifikasi Risiko Burnout Pekerja Tech",
     page_icon="🔥",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -56,7 +54,7 @@ CLASS_COLORS = {
 }
 CLASS_DESC = {
     "Low": "Kondisi kerja dan gaya hidup relatif seimbang. Tetap jaga rutinitas sehat.",
-    "Moderate": "Mulai ada tanda tekanan kerja. Perlu perhatian pada keseimbangan kerja-hidup.",
+    "Moderate": "Mulai ada tanda tekanan kerja. Perlu perhatian pada keseimbangan kerja dan gaya hidup.",
     "High": "Tanda-tanda burnout cukup signifikan. Disarankan mengambil langkah pemulihan aktif.",
     "Severe": "Risiko burnout sangat tinggi. Sangat disarankan mencari dukungan profesional segera.",
 }
@@ -361,10 +359,10 @@ VARIABLE_CONFIG = {
 }
 
 VARIABLE_INFO_DESC = {
-    "age": "Usia Karyawan Tech. Faktor demografis dasar yang sering berkorelasi dengan tahap karier.",
-    "gender": "Jenis kelamin karyawan Tech.",
-    "country": "Negara tempat Karyawan Tech bekerja, memengaruhi budaya kerja & regulasi.",
-    "job_role": "Peran/posisi pekerjaan Karyawan Tech saat ini.",
+    "age": "Usia Pekerja Tech. Faktor demografis dasar yang sering berkorelasi dengan tahap karier.",
+    "gender": "Jenis kelamin Pekerja Tech.",
+    "country": "Negara tempat Pekerja Tech bekerja, memengaruhi budaya kerja & regulasi.",
+    "job_role": "Peran/posisi pekerjaan Pekerja Tech saat ini.",
     "seniority_level": "Tingkat senioritas dalam jenjang karier.",
     "years_experience": "Total pengalaman kerja profesional (tahun).",
     "years_at_company": "Lama bekerja di perusahaan saat ini (tahun).",
@@ -717,7 +715,7 @@ def page_klasifikasi(models, load_errors):
         if not models:
             st.stop()
             
-    st.markdown('<div class="step-header">Langkah 1 — Input Semua Variabel</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Input Semua Variabel</div>', unsafe_allow_html=True)
 
     values = {}
     tabs = st.tabs([f"👤 {k}" if k == "Demografi" else
@@ -753,14 +751,14 @@ def page_klasifikasi(models, load_errors):
                         mapped_value = dict(field["options"])[choice]
                         values[field["name"]] = mapped_value
 
-    st.markdown('<div class="step-header">Langkah 2 — Pilih Model</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Pilih Model</div>', unsafe_allow_html=True)
     available_models = list(models.keys())
     if not available_models:
         st.warning("Belum ada model yang berhasil dimuat.")
         return
     model_choice = st.radio("Model klasifikasi:", available_models, horizontal=True)
 
-    st.markdown('<div class="step-header">Langkah 3 — Jalankan Klasifikasi</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Jalankan Klasifikasi</div>', unsafe_allow_html=True)
     run = st.button("🚀 Jalankan Klasifikasi", type="primary", use_container_width=True)
 
     if run:
@@ -811,8 +809,6 @@ def page_klasifikasi(models, load_errors):
 
 
 # HALAMAN: INFORMASI KELOMPOK VARIABEL
-
-
 def page_informasi_variabel():
     st.markdown('<div class="main-header">📚 Informasi Kelompok Variabel</div>', unsafe_allow_html=True)
     st.markdown(
@@ -840,8 +836,6 @@ def page_informasi_variabel():
 
 
 # HALAMAN: RIWAYAT PREDIKSI
-
-
 def page_riwayat():
     st.markdown('<div class="main-header">🕘 Riwayat Prediksi</div>', unsafe_allow_html=True)
 
