@@ -26,7 +26,7 @@ MODEL_PATHS = {
     "Random Forest": os.path.join(MODEL_DIR, "random_forest_burnout_pipeline.joblib"),
 }
 
-# Urutan fitur HARUS sama persis dengan urutan 27 variabel saat training.
+# Urutan fitur HARUS sama persis dengan urutan 27 Fitur saat training.
 # Kalau urutan/nama kolom di dataset training kamu berbeda, ubah di sini.
 FEATURE_ORDER = [
     "age", "gender", "country",
@@ -60,7 +60,7 @@ CLASS_DESC = {
 }
 
 
-# KONFIGURASI FORM INPUT (27 VARIABEL, DIKELOMPOKKAN 4 KATEGORI SESUAI SITEMAP)
+# KONFIGURASI FORM INPUT (27 Fitur, DIKELOMPOKKAN 4 KATEGORI SESUAI SITEMAP)
 # type: "number" (int), "float", "select", "slider"
 # Untuk "select": options berupa list (label_tampilan, nilai_ke_model)
 # CATATAN: sesuaikan opsi/skala di bawah ini kalau berbeda dengan dataset training kamu.
@@ -658,7 +658,7 @@ def page_beranda():
         st.markdown("""
         <div class="card">
         Aplikasi ini membantu memprediksi <b>tingkat risiko burnout</b> seseorang berdasarkan
-        27 variabel yang mencakup <b>demografi</b>, <b>konteks kerja</b>, <b>gaya hidup</b>,
+        27 Fitur yang mencakup <b>demografi</b>, <b>konteks kerja</b>, <b>gaya hidup</b>,
         dan <b>budaya tempat kerja</b>. Prediksi dihasilkan oleh dua model machine learning
         yang bisa dipilih secara interaktif: <b>XGBoost</b> dan <b>Random Forest</b>.
         </div>
@@ -681,7 +681,7 @@ def page_beranda():
         <div class="card">
         <ol>
             <li>Buka menu <b>Klasifikasi Risiko</b> di sidebar.</li>
-            <li>Isi seluruh 27 variabel pada form yang terbagi dalam 4 kategori.</li>
+            <li>Isi seluruh 27 Fitur pada form yang terbagi dalam 4 kategori.</li>
             <li>Sistem akan memvalidasi kelengkapan & kewajaran input.</li>
             <li>Pilih model prediksi: <b>XGBoost</b> atau <b>Random Forest</b>.</li>
             <li>Klik tombol <b>Jalankan Klasifikasi</b> untuk melihat hasil kategori risiko beserta probabilitasnya.</li>
@@ -690,13 +690,13 @@ def page_beranda():
         </div>
         """, unsafe_allow_html=True)
 
-    st.info("💡 Lihat menu **Informasi Kelompok Variabel** untuk penjelasan tiap variabel sebelum mengisi form.")
+    st.info("💡 Lihat menu **Informasi Kelompok Fitur** untuk penjelasan tiap Fitur sebelum mengisi fitur.")
 
 
 # HALAMAN: KLASIFIKASI RISIKO
 def page_klasifikasi(models, load_errors):
     st.markdown('<div class="main-header">🧮 Klasifikasi Risiko Burnout</div>', unsafe_allow_html=True)
-    st.markdown('<div class="sub-header">Isi seluruh variabel di bawah untuk mendapatkan hasil klasifikasi.</div>',
+    st.markdown('<div class="sub-header">Isi seluruh Fitur di bawah untuk mendapatkan hasil klasifikasi.</div>',
                 unsafe_allow_html=True)
     
     if load_errors:
@@ -715,7 +715,7 @@ def page_klasifikasi(models, load_errors):
         if not models:
             st.stop()
             
-    st.markdown('<div class="step-header">Input Semua Variabel</div>', unsafe_allow_html=True)
+    st.markdown('<div class="step-header">Input Semua Fitur</div>', unsafe_allow_html=True)
 
     values = {}
     tabs = st.tabs([f"👤 {k}" if k == "Demografi" else
@@ -808,11 +808,11 @@ def page_klasifikasi(models, load_errors):
 
 
 
-# HALAMAN: INFORMASI KELOMPOK VARIABEL
-def page_informasi_variabel():
-    st.markdown('<div class="main-header">📚 Informasi Kelompok Variabel</div>', unsafe_allow_html=True)
+# HALAMAN: INFORMASI KELOMPOK Fitur
+def page_informasi_Fitur():
+    st.markdown('<div class="main-header">📚 Informasi Kelompok Fitur</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="sub-header">Penjelasan 27 variabel yang digunakan model, dikelompokkan menjadi 4 kategori.</div>',
+        '<div class="sub-header">Penjelasan 27 Fitur yang digunakan model, dikelompokkan menjadi 4 kategori.</div>',
         unsafe_allow_html=True,
     )
 
@@ -901,7 +901,7 @@ def main():
         st.caption("Menu Aplikasi")
         page = st.radio(
             "Menu",
-            ["🏠 Beranda", "🧮 Klasifikasi Risiko", "📚 Informasi Kelompok Variabel", "🕘 Riwayat Prediksi"],
+            ["🏠 Beranda", "🧮 Klasifikasi Risiko", "📚 Informasi Kelompok Fitur", "🕘 Riwayat Prediksi"],
             label_visibility="collapsed",
         )
         st.divider()
@@ -913,8 +913,8 @@ def main():
         page_beranda()
     elif page == "🧮 Klasifikasi Risiko":
         page_klasifikasi(models, load_errors)
-    elif page == "📚 Informasi Kelompok Variabel":
-        page_informasi_variabel()
+    elif page == "📚 Informasi Kelompok Fitur":
+        page_informasi_Fitur()
     elif page == "🕘 Riwayat Prediksi":
         page_riwayat()
 
