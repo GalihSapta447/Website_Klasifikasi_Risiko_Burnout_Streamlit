@@ -645,7 +645,7 @@ def validate_input(values: dict):
 
 # HALAMAN: BERANDA
 def page_beranda():
-    st.markdown('<div class="main-header">🔥 Website Klasifikasi Risiko Burnout Pekerja Tech</div>', unsafe_allow_html=True)
+    st.markdown('<div class="main-header">🔥 Tech Risk Burnout Web</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="sub-header">Deteksi dini risiko burnout berbasis Machine Learning '
         '(XGBoost & Random Forest)</div>',
@@ -897,7 +897,7 @@ def main():
     init_session_state()
 
     with st.sidebar:
-        st.markdown("## 🔥 Tech Risk Burnout")
+        st.markdown("## 🔥 Tech Risk Burnout Web")
         st.caption("Menu Aplikasi")
         page = st.radio(
             "Menu",
