@@ -669,7 +669,7 @@ def page_beranda():
         <ul>
             <li>Membantu individu maupun organisasi mengenali risiko burnout secara dini.</li>
             <li>Memberikan gambaran probabilitas risiko pada 4 kategori: Rendah, Sedang, Tinggi, dan Sangat Tinggi.</li>
-            <li>Menjadi alat bantu skrining awal bukan pengganti diagnosis profesional kesehatan mental.</li>
+            <li>Hasil ini hanya sebagai gambaran awal dan bukan pengganti diagnosis dari tenaga profesional.</li>
             <li>Menyediakan riwayat prediksi agar tren risiko dapat dipantau dari waktu ke waktu.</li>
         </ul>
         </div>
