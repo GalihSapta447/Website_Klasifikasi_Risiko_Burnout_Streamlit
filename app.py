@@ -647,8 +647,7 @@ def validate_input(values: dict):
 def page_beranda():
     st.markdown('<div class="main-header">🔥 Tech Risk Burnout Web</div>', unsafe_allow_html=True)
     st.markdown(
-        '<div class="sub-header">Deteksi dini risiko burnout berbasis Machine Learning '
-        '(XGBoost & Random Forest)</div>',
+        '<div class="sub-header">Gunakan prediksi berbasis Machine Learning untuk mendapatkan gambaran tingkat risiko burnout Anda. </div>',
         unsafe_allow_html=True,
     )
 
