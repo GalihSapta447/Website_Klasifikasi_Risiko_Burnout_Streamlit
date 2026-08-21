@@ -32,9 +32,7 @@ seperti di atas, atau ubah `MODEL_PATHS` di `app.py`).
 
 ## ⚠️ PENTING — Verifikasi Sebelum Dipakai
 
-Karena proses pembuatan app ini dilakukan di lingkungan tanpa akses internet, saya
-**belum bisa memuat penuh** pipeline (`xgboost` & `imbalanced-learn` tidak tersedia
-di sandbox), sehingga beberapa hal berikut adalah **asumsi** yang perlu kamu cek ulang
+beberapa hal berikut adalah yang perlu di cek ulang
 di environment lokal:
 
 1. **Urutan & nama kolom fitur** — didefinisikan di `FEATURE_ORDER` (app.py), diambil
@@ -58,25 +56,7 @@ di environment lokal:
    pipeline (`model.classes_`), dengan fallback ke `CLASS_ORDER = ["Low","Moderate",
    "High","Severe"]`. Jalankan `inspect_model.py` untuk memastikan urutannya benar.
 
-### Cara memverifikasi
 
-Jalankan di environment lokal (yang sudah `pip install -r requirements.txt`):
-
-```bash
-python inspect_model.py
-```
-
-Script ini akan mencetak:
-- Struktur langkah-langkah pipeline
-- `classes_` (urutan label output asli)
-- Nama-nama kolom yang diharapkan tiap tahap preprocessing (kalau tersedia)
-
-Cocokkan hasilnya dengan `FEATURE_ORDER` dan `VARIABLE_CONFIG` di `app.py`, lalu
-sesuaikan bila ada perbedaan.
-
-Kalau prediksi tetap error di aplikasi, buka expander **"🔍 Debug: data yang terkirim
-ke model"** di halaman Klasifikasi Risiko — itu menampilkan persis data yang dikirim
-ke pipeline sehingga mudah dibandingkan dengan format data training kamu.
 
 ## 🧭 Struktur Navigasi
 
