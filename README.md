@@ -9,7 +9,6 @@ sesuai sitemap & flowchart yang sudah disepakati.
 ```
 burnout_app/
 ├── app.py                  # Aplikasi utama Streamlit
-├── inspect_model.py         # Script bantu untuk cek isi pipeline model
 ├── requirements.txt
 ├── README.md
 ├── models/
