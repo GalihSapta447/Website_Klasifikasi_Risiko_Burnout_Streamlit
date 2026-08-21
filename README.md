@@ -20,7 +20,7 @@ burnout_app/
 ## 🚀 Cara Menjalankan
 
 ```bash
-cd burnout_app
+cd Website_Klasifikasi_Risiko_Burnout_Streamlit-main
 python -m venv venv
 source venv/bin/activate        # Windows: venv\Scripts\activate
 pip install -r requirements.txt
